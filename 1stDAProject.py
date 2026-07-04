@@ -21,7 +21,7 @@
 # **Date:** June 2026
 
 # %% [markdown]
-# # 1. Introduction
+# ## 1. Introduction
 # The goal of this project is to utilize a [Kaggle](https://www.kaggle.com) dataset to perform data analysis and generate a report, documenting my processes, insights, and conclusions within this Jupyter Notebook.
 
 # %% [markdown]
@@ -95,7 +95,7 @@ df[["Gender", "Workout_Type"]].value_counts()
 # ---
 
 # %% [markdown]
-# #### Recognizing the Data Source & Context
+# ##### Recognizing the Data Source & Context
 
 # %% [markdown]
 # While clean in structure, the dataset contains several potential biases, limitations, and quirks that a Data Analyst must consider. The primary bias is that the dataset was *simulated and generated* using averages from publicly available studies and industry reports. This means the data may under- or over-represent certain behaviors or characteristics.
@@ -238,7 +238,7 @@ plt.tight_layout()
 plt.show()
 
 # %% [markdown]
-# ##### Key Insights:
+# ###### Key Insights 
 
 # %% [markdown]
 # 1. `Age`
@@ -444,7 +444,7 @@ plt.tight_layout()
 plt.show()
 
 # %% [markdown]
-# ##### Key Insights
+# ###### Key Insights
 
 # %% [markdown]
 # 1. Gender distribution is roughly balanced.
@@ -666,8 +666,9 @@ plt.tight_layout()
 plt.show()
 
 # %% [markdown]
-# ##### Key Insights
-#
+# ###### Key Insights
+
+# %% [markdown]
 # 1. `Session_Duration` vs. `Calories_Burned`
 #     - The correlation matrix reveals an exceptionally strong positive correlation of 0.91 between the two, confirming that the data generation algorithm primarily tied caloric expenditure to workout length. This relationship accounts for approximately 83 percent of the variance in calories burned, with the remaining 17 percent reflecting programmed influences of workout intensity, exercise type, and simulated individual metabolic differences.
 #
@@ -687,13 +688,13 @@ plt.show()
 # ---
 
 # %% [markdown]
-# #### Data Transformation & Feature Engineering
+# ## 3. Data Transformation & Feature Engineering
 
 # %% [markdown]
 # Having completed the exploratory data analysis and visualization phases, I now move onto transforming the data to enhance the analytical value of this simulated dataset. This phase involves creating derived features that provide new perspectives on the data, standardizing measurements for fair comparison across different scales, and generating aggregated statistics that reveal patterns at the group level. These transformation steps prepare the dataset for deeper statistical analysis and demonstrate techniques commonly used in data analysis and engineering workflows to extract maximum insight from raw data.
 
 # %% [markdown]
-# ##### Creating Derived Features
+# ### Creating Derived Features
 
 # %% [markdown]
 # Feature engineering involves creating new calculated columns from existing variables to provide additional analytical perspectives and answer specific business questions. By constructing metrics such as `Calorie_Efficiency`, BMI Classifications, and Composite Intensity Scores, I can transform raw measurements into meaningful indicators that support more nuanced analysis of workout performance and member characteristics.
@@ -729,13 +730,13 @@ df[["Calorie_Efficiency", "BMI_Category", "Age_Group", "Intensity_Score"]].head(
 
 # %% [markdown]
 # **Features Created:**
-# - `Calorie_Efficiency`: Calories burned per hour of exercise
+# - `Calorie_Efficiency`: Calories burned per hour of exercise.
 # - `BMI_Category`: Standard Body Mass Index (BMI) classifications (Underweight, Normal, Overweight, Obese). Based on the [World Health Organization (WHO)](https://www.cdc.gov/bmi/adult-calculator/bmi-categories.html).
-# - `Age_Group`: Life-stage groupings for demographic analysis
-# - `Intensity_Score`: Percentage of heart rate capacity utilized during workout
+# - `Age_Group`: Life-stage groupings for demographic analysis.
+# - `Intensity_Score`: Percentage of heart rate capacity utilized during workout.
 
 # %% [markdown]
-# ##### Normalize/Standardize Numerical Features
+# #### Normalize/Standardize Numerical Features
 
 # %% [markdown]
 # Variables in this dataset are measured on vastly different scales. `Age` ranges from 18 to 59, while `Calories_Burned` ranges from 300 to 1,700, making direct numerical comparisons problematic without standardization. Scaling transforms all features to a common range (typically, with a mean of zero and a standard deviation of one), ensuring that variables with larger numerical ranges do not artificially dominate analyses or visualizations that compare multiple metrics simultaneously.
@@ -745,10 +746,10 @@ from sklearn.preprocessing import StandardScaler
 
 # Select numerical columns to standardize (excluding categorical and derived category features)
 columns_to_scale: list = [
-    'Age', 'Weight (lb)', 'Height (ft)', 'Max_BPM', 'Avg_BPM', 
-    'Resting_BPM', 'Session_Duration (hours)', 'Calories_Burned',
-    'Fat_Percentage', 'Water_Intake (liters)', 'Workout_Frequency (days/week)',
-    'Experience_Level', 'BMI', 'Calorie_Efficiency', 'Intensity_Score'
+    "Age", "Weight (lb)", "Height (ft)", "Max_BPM", "Avg_BPM", 
+    "Resting_BPM", "Session_Duration (hours)", "Calories_Burned",
+    "Fat_Percentage", "Water_Intake (liters)", "Workout_Frequency (days/week)",
+    "Experience_Level", "BMI", "Calorie_Efficiency", "Intensity_Score"
 ]
 
 # Initialize the scaler
@@ -765,60 +766,63 @@ df_scaled[columns_to_scale].describe().loc[['mean', 'std']].round(2)
 # The standardized features now share a common scale with means approximately equal to zero and standard deviations of one. The original DataFrame `df` remains unchanged for interpretability, while `df_scaled` is available for any analyses requiring normalized inputs.
 
 # %% [markdown]
-# ##### Create Aggregated Summary Statistics
+# ### Create Aggregated Summary Statistics
 
 # %% [markdown]
 # While individual observations provide granular detail, strategic decision-making requires understanding patterns at the group and category levels through statistical aggregation. By calculating summary metrics across combinations of categorical variables, such as average performance by `Gender` and `Workout_Type`, or session characteristics by `Experience_Level`, I can identify trends and differences that inform targeted recommendations for distinct member segments.
 
 # %%
 # Summary 1: Performance metrics by Experience Level
-experience_summary = df.groupby('Experience_Level').agg({
-    'Calories_Burned': ['mean', 'median', 'std'],
-    'Session_Duration (hours)': 'mean',
-    'Calorie_Efficiency': 'mean',
-    'Workout_Frequency (days/week)': 'mean'}).round(2)
+experience_summary = df.groupby("Experience_Level").agg({
+    "Calories_Burned": ["mean", "median", "std"],
+    "Session_Duration (hours)": "mean",
+    "Calorie_Efficiency": "mean",
+    "Workout_Frequency (days/week)": "mean"}).round(2)
 
-print("=== PERFORMANCE BY EXPERIENCE LEVEL ===")
-print("(1 = Beginner, 2 = Intermediate, 3 = Advanced)\n")
+print("\n=== PERFORMANCE BY EXPERIENCE LEVEL ===")
+print("(1 = Beginner, 2 = Intermediate, 3 = Advanced)")
 display(experience_summary)
 
 # Summary 2: Calories burned by Gender and Workout Type
-gender_workout_summary = df.groupby(['Gender', 'Workout_Type']).agg({
-    'Calories_Burned': 'mean',
-    'Session_Duration (hours)': 'mean',
-    'Intensity_Score': 'mean'}).round(2)
+gender_workout_summary = df.groupby(["Gender", "Workout_Type"]).agg({
+    "Calories_Burned": "mean",
+    "Session_Duration (hours)": "mean",
+    "Intensity_Score": "mean"}).round(2)
 
-print("\n=== PERFORMANCE BY GENDER AND WORKOUT TYPE ===\n")
+print("\n=== PERFORMANCE BY GENDER AND WORKOUT TYPE ===")
 display(gender_workout_summary)
 
 # Summary 3: Age Group Analysis
-age_group_summary = df.groupby('Age_Group', observed=True).agg({
-    'Calories_Burned': 'mean',
-    'BMI': 'mean',
-    'Resting_BPM': 'mean',
-    'Workout_Frequency (days/week)': 'mean'}).round(2)
+age_group_summary = df.groupby("Age_Group", observed=True).agg({
+    "Calories_Burned": "mean",
+    "BMI": "mean",
+    "Resting_BPM": "mean",
+    "Workout_Frequency (days/week)": "mean"}).round(2)
 
-print("\n=== HEALTH METRICS BY AGE GROUP ===\n")
+print("\n=== HEALTH METRICS BY AGE GROUP ===")
 display(age_group_summary)
 
 # %% [markdown]
 # **Key Observations:**
 #
 # - `Experience_Level` shows clear progression: advanced members burn more calories, exercise longer, and work out more frequently than beginners.
-# - `Gender` × `Workout_Type` reveals whether certain exercise modalities show performance differences between male and female members.
+# - `Gender` and `Workout_Type` reveals whether certain exercise modalities show performance differences between male and female members.
 # - `Age_Group` comparisons highlight how fitness metrics and habits shift across life stages.
 #
 # These grouped summaries provide the foundation for targeted recommendations in the Business Insights section.
 
 # %% [markdown]
-# #### Statistical Interpretation & Hypothesis Testing
+# ---
+
+# %% [markdown]
+# ## 4. Statistical Interpretation & Hypothesis Testing
 
 # %% [markdown]
 # The exploratory analysis done previously revealed apparent differences in calorie expenditure across gender, workout type, and experience level. However, observed differences in sample data ***do not automatically*** indicate true population-level effects. They could result from random variation. Statistical hypothesis testing provides a rigorous framework to determine whether these patterns are statistically significant or likely attributable to chance.
 #
 # This section applies two common inferential tests:
-# - **Independent Samples T-Test**: Evaluates whether male and female members differ significantly in calories burned
-# - **One-Way ANOVA**: Evaluates whether significant differences exist in calories burned across the four workout types
+# - **Independent Samples T-Test**: Evaluates whether male and female members differ significantly in calories burned.
+# - **One-Way ANOVA**: Evaluates whether significant differences exist in calories burned across the four workout types.
 #
 # A significance threshold of α = 0.05 is used for all tests, meaning results with p-values below 0.05 are considered statistically significant.
 
@@ -830,8 +834,8 @@ from scipy import stats
 # H₀: No significant difference in calories burned between males and females
 # H₁: Significant difference exists in calories burned between males and females
 
-male_calories = df[df['Gender'] == 'Male']['Calories_Burned']
-female_calories = df[df['Gender'] == 'Female']['Calories_Burned']
+male_calories = df[df["Gender"] == "Male"]["Calories_Burned"]
+female_calories = df[df["Gender"] == "Female"]["Calories_Burned"]
 
 t_stat, t_pvalue = stats.ttest_ind(male_calories, female_calories)
 
@@ -846,7 +850,7 @@ print(
 print(f"\nT-statistic: {t_stat:.4f}")
 print(f"P-value: {t_pvalue:.4f}")
 print(
-    f"\nResult: {'SIGNIFICANT' if t_pvalue < 0.05 else 'NOT SIGNIFICANT'} (α = 0.05)")
+    f"\nResult: {"SIGNIFICANT" if t_pvalue < 0.05 else "NOT SIGNIFICANT"} (α = 0.05)")
 
 
 ##  TEST 2: One-Way ANOVA (Workout Type vs Calories Burned)  ##
@@ -854,10 +858,10 @@ print(
 # H₀: No significant difference in calories burned across workout types
 # H₁: At least one workout type differs significantly in calories burned
 
-cardio = df[df['Workout_Type'] == 'Cardio']['Calories_Burned']
-strength = df[df['Workout_Type'] == 'Strength']['Calories_Burned']
-hiit = df[df['Workout_Type'] == 'HIIT']['Calories_Burned']
-yoga = df[df['Workout_Type'] == 'Yoga']['Calories_Burned']
+cardio = df[df["Workout_Type"] == "Cardio"]["Calories_Burned"]
+strength = df[df["Workout_Type"] == "Strength"]["Calories_Burned"]
+hiit = df[df["Workout_Type"] == "HIIT"]["Calories_Burned"]
+yoga = df[df["Workout_Type"] == "Yoga"]["Calories_Burned"]
 
 f_stat, anova_pvalue = stats.f_oneway(cardio, strength, hiit, yoga)
 
@@ -872,10 +876,10 @@ print(f"Yoga mean: {yoga.mean():.2f} calories")
 print(f"\nF-statistic: {f_stat:.4f}")
 print(f"P-value: {anova_pvalue:.4f}")
 print(
-    f"\nResult: {'SIGNIFICANT' if anova_pvalue < 0.05 else 'NOT SIGNIFICANT'} (α = 0.05)")
+    f"\nResult: {"SIGNIFICANT" if anova_pvalue < 0.05 else "NOT SIGNIFICANT"} (α = 0.05)")
 
 # %% [markdown]
-# ##### Hypothesis Testing Results & Interpretation
+# ### Hypothesis Testing Results & Interpretation
 #
 # **Test 1 — Gender Comparison (T-Test):**
 # The independent samples t-test evaluated whether calorie expenditure differs significantly between male and female gym members. The results indicate a statistically significant difference (t = 4.75, p < 0.001). On average, male members burned 944.46 calories per session compared to 862.25 for female members, a difference of 82.21 calories. Because p < 0.05, we reject the null hypothesis and conclude that gender is associated with a meaningful difference in calories burned.
@@ -892,15 +896,18 @@ print(
 # These statistical tests confirm which exploratory observations reflect genuine patterns versus random variation, providing an evidence-based foundation for the business recommendations that follow.
 
 # %% [markdown]
-# #### Business Insights & Recommendations
+# ---
+
+# %% [markdown]
+# ## 5. Business Insights & Recommendations
 
 # %% [markdown]
 # The preceding analysis identified several patterns in gym member behavior and performance. This section translates those statistical findings into actionable recommendations for fitness facility operators, program designers, or wellness professionals.
 #
 # These insights are framed around three strategic priorities:
-# 1. **Maximizing caloric expenditure** — helping members achieve their fitness goals
-# 2. **Supporting member progression** — facilitating advancement from beginner to advanced levels
-# 3. **Optimizing program design** — informing workout scheduling and class offerings
+# 1. **Maximizing caloric expenditure** — Helping members achieve their fitness goals.
+# 2. **Supporting member progression** — Facilitating advancement from beginner to advanced levels.
+# 3. **Optimizing program design** — Informing workout scheduling and class offerings.
 #
 # > **Important caveat**: These recommendations are derived from synthetic data. While the patterns are internally consistent, any real-world implementation would require validation against actual member data.
 
@@ -927,12 +934,24 @@ print(
 # - **Recommendation:** Avoid marketing any single workout type as superior for calorie burning. Instead, encourage members to choose modalities based on personal preference, sustainability, and enjoyment. Factors that are more likely to drive adherence and, consequently, longer session durations.
 
 # %% [markdown]
-# ##### Summary
+# ---
+
+# %% [markdown]
+# ## Conclusion
 #
-# This analysis demonstrates that **session duration is the single most influential factor** in caloric expenditure, outweighing workout type, demographic characteristics, and even exercise intensity. For gym operators, this suggests that strategies encouraging longer, consistent workout sessions may yield greater member outcomes than promoting specific exercise modalities.
+# This project walked through the full process of analyzing a dataset, from initial exploration to final recommendations. Starting with 973 gym member records and 15 variables, the analysis moved through data profiling, visualization, feature engineering, statistical testing, and ultimately translated findings into practical insights.
 #
-# The observed progression across experience levels — with advanced members burning approximately 400 more calories per session than beginners — highlights the value of structured advancement pathways and intermediate milestone programming.
+# **Key takeaways from the analysis:**
 #
-# While gender differences in calorie expenditure reached statistical significance, the practical magnitude (82 calories) is modest and likely reflects physiological factors rather than actionable programming opportunities.
+# - **Session duration is the strongest predictor of calories burned** (r = 0.91), meaning how long someone works out matters more than what type of exercise they do or what their physical characteristics are.
+# - **Experience level shows clear progression** — advanced members burn roughly 400 more calories per session than beginners, likely because they exercise longer and more frequently.
+# - **Workout type does not significantly affect calorie burn** (p = 0.416). The 41-calorie difference between the highest and lowest workout types could easily be due to random chance.
+# - **Gender differences, while statistically significant, are modest** — an 82-calorie gap that probably reflects natural physiological differences rather than something a gym could act on.
 #
-# These findings provide a data-informed foundation for evidence-based fitness programming, though validation against real-world data remains essential before operational implementation.
+# **Limitations to keep in mind:**
+#
+# This dataset is synthetic, meaning it was computer-generated using averages from fitness research rather than collected from real gym members. The patterns are internally consistent, but these findings would need to be tested against real-world data before being applied in practice.
+#
+# **Reflection:**
+#
+# This was my first data analysis portfolio project. It reinforced the importance of understanding your data before drawing conclusions, being honest about what the data can and cannot tell you, and keeping the end audience in mind when presenting findings. The most surprising discovery was how dominant session duration is compared to every other variable — a reminder that simple factors often matter more than complex ones.
