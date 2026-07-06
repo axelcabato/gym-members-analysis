@@ -6,7 +6,7 @@ A data analysis project exploring gym member workout patterns, physical attribut
 
 **Complete**
 
-This is my first data analysis portfolio project, developed as I transition into the data science field. The project follows industry-standard practices and demonstrates a methodical approach to extracting insights from data.
+This is my first data analysis portfolio project, developed as I transition into the data science field. The project is now fully completed and documented in the main Jupyter notebook, covering the full workflow from data loading and exploration to statistical testing and business recommendations.
 
 | Phase | Status |
 |-------|--------|
@@ -20,7 +20,7 @@ This is my first data analysis portfolio project, developed as I transition into
 
 ## Project Overview
 
-This analysis examines a dataset of 973 gym members, investigating relationships between workout characteristics, physical attributes, and performance metrics. The project addresses questions such as:
+This completed analysis examines a dataset of 973 gym members, investigating relationships between workout characteristics, physical attributes, and performance metrics. The notebook now includes all major stages of the workflow and addresses questions such as:
 
 - What factors most strongly predict caloric expenditure during workouts?
 - How do performance metrics vary across experience levels and workout types?
@@ -38,17 +38,19 @@ The analysis begins with data profiling, including structural validation, missin
 
 ### Exploratory Data Analysis
 
-The EDA phase covers three areas:
+The EDA phase covers the analysis steps presented in the notebook:
 
-**Univariate Analysis**: Distribution examination of numerical features including age, weight, calories burned, session duration, and body composition metrics.
+**Data Profiling**: Structural validation, missing value checks, and initial descriptive statistics to confirm the dataset was clean and properly formatted.
 
-**Categorical Analysis**: Frequency distributions across gender, workout type, experience level, and workout frequency. Confirmed balanced representation across categories.
+**Recognizing the Data Source & Context**: Acknowledging that the dataset is synthetic and discussing the implications for interpretation and generalization.
 
-**Bivariate Analysis**: Correlation analysis and relationship mapping between variables, including correlation matrices, grouped comparisons, and scatter plot visualizations.
+**Data Preparation**: Converting key measurements from metric to imperial units for broader interpretability and ensuring the dataset is ready for analysis.
+
+**Data Visualization**: Including univariate, categorical, and bivariate analyses through histograms, count plots, heatmaps, box plots, and scatter plots.
 
 ### Feature Engineering
 
-Created four derived features to support deeper analysis:
+Created derived features and unit conversions to support deeper analysis:
 
 | Feature | Description | Purpose |
 |---------|-------------|---------|
@@ -68,10 +70,11 @@ Created four derived features to support deeper analysis:
 ## Repository Structure
 
 ```
-├── 1stDAProject.ipynb    # Main analysis notebook
-├── 1stDAProject.py       # Python script version (Jupytext sync)
+├── gym_members_analysis.ipynb    # Main analysis notebook
+├── gym_members_analysis.py       # Python script version (Jupytext sync)
 ├── data/
 │   └── gym_members_exercise_tracking.csv
+├── requirements.txt
 ├── .gitignore
 ├── .gitattributes
 └── README.md
@@ -101,11 +104,12 @@ The dataset is synthetic, generated using averages from publicly available fitne
 - Recognition of data limitations and appropriate caveats on conclusions
 - Application of Python data science tools including pandas, seaborn, matplotlib, and scikit-learn
 - Clear documentation of findings with visualizations designed for both technical and general audiences
+- Statistical testing and business-oriented recommendations grounded in the analysis
 - Version control with Git and organized project structure
 
 ## About the Author
 
-I am building skills in data analysis with a background in business administration and marketing. This project represents my first step into the data science field and my approach to learning: methodical, well-documented, and focused on practical skills.
+I am building skills in Data Analysis with a background in Business Administration and Marketing. This project represents my first step into the Data Science field and my approach to learning: methodical, well-documented, and focused on practical skills.
 
 I welcome feedback from experienced data professionals.
 
@@ -117,4 +121,4 @@ I welcome feedback from experienced data professionals.
 
 ---
 
-*Last updated: June 2026*
+*Last updated: July 2026*
