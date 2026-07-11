@@ -6,9 +6,9 @@
 #       extension: .py
 #       format_name: percent
 #       format_version: '1.3'
-#       jupytext_version: 1.17.3
+#       jupytext_version: 1.19.4
 #   kernelspec:
-#     display_name: .venv
+#     display_name: .venv (3.13.12.final.0)
 #     language: python
 #     name: python3
 # ---
@@ -18,7 +18,7 @@
 #
 # **Author:** Axel Christian Cabato
 #
-# **Date:** June 2026
+# **Date:** July 2026
 
 # %% [markdown]
 # ## 1. Introduction
@@ -60,7 +60,7 @@ df.tail()
 # #### Data Profiling
 
 # %%
-# Output a concicise summary of the DataFrame
+# Output a concise summary of the DataFrame
 print("DATAFRAME SUMMARY")
 df.info()
 
@@ -126,16 +126,16 @@ df["Height (ft)"] = round(df["Height (m)"] * 3.28, 2)
 # Kilogram to Pound Conversion
 df["Weight (lb)"] = round(df["Weight (kg)"] * 2.2, 2)
 
-# Verify post-conversaion values are correct
+# Verify post-conversion values are correct
 df[["Height (m)", "Height (ft)", "Weight (kg)", "Weight (lb)"]]
 
 # %%
 df[["Height (ft)", "Weight (lb)"]].describe()
 
 # %% [markdown]
-# I use the `.describe()` method to validate the newly-engineered `Weight (lbs)` and `Height (ft)` features, confirming that the new columns have a reasonable range of values and are correctly populated. This ensures the integrity of our dataset for subsequent analysis.
+# I use the `.describe()` method to validate the newly-engineered `Weight (lb)` and `Height (ft)` features, confirming that the new columns have a reasonable range of values and are correctly populated. This ensures the integrity of our dataset for subsequent analysis.
 #
-# > I will be using Imperial units in my analyses going foward.
+# > I will be using Imperial units in my analyses going forward.
 
 # %% [markdown]
 # ---
@@ -153,7 +153,7 @@ df[["Height (ft)", "Weight (lb)"]].describe()
 # ##### Univariate Analysis
 
 # %% [markdown]
-# This type of analysis will allow me to understand their individual distributions, central tendencies, and potential outliers. To accomplish this, I will generate histograms for each of the key numerical columns with a Kernal Density Estimate (KDE) Curve to overlay each to show the smoothed distribution shape.
+# This type of analysis will allow me to understand their individual distributions, central tendencies, and potential outliers. To accomplish this, I will generate histograms for each of the key numerical columns with a Kernel Density Estimate (KDE) Curve to overlay each to show the smoothed distribution shape.
 
 # %%
 import pandas as pd
@@ -186,7 +186,7 @@ fig, axes = plt.subplots(nrows=2, ncols=5, figsize=(20, 10))
 axes = axes.flatten()
 
 
-###  Generate Historigrams  ###
+###  Generate Histograms  ###
 
 # Loop through each feature and create its histogram
 for i, feature in enumerate(numerical_features):
