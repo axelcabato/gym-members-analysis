@@ -4,19 +4,7 @@ A data analysis project exploring gym member workout patterns, physical attribut
 
 ## Project Status
 
-**Complete**
-
-This is my first data analysis portfolio project, developed as I transition into the data science field. The project is now fully completed and documented in the main Jupyter notebook, covering the full workflow from data loading and exploration to statistical testing and business recommendations.
-
-| Phase | Status |
-|-------|--------|
-| Exploratory Data Analysis | Complete |
-| Data Visualization | Complete |
-| Feature Engineering | Complete |
-| Data Standardization | Complete |
-| Aggregated Statistics | Complete |
-| Hypothesis Testing | Complete |
-| Business Recommendations | Complete |
+**Complete** — All phases finished: EDA, visualization, feature engineering, statistical testing, and business recommendations.
 
 ## Project Overview
 
